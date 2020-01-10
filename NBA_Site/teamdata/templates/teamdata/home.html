@@ -1,0 +1,112 @@
+{% extends "teamdata/base.html" %}
+{% block content %}
+    <h1>Team Data Home</h1>
+    <header>
+        <h2>Filler Stuff to move this down</h2>
+        <h2>Filler Stuff to move this down</h2>
+        <h2>Filler Stuff to move this down</h2>
+        <h2>Filler Stuff to move this down</h2>
+        <h2>Filler Stuff to move this down</h2>
+        <h2>Filler Stuff to move this down</h2>
+        <h2>Filler Stuff to move this down</h2>
+    </header>
+    <table id="shoot_data" class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive">
+          <thead class="thead-light">
+            <tr>
+
+                <th id="team">Team</th>
+                <th>Morey Rate</th>
+                <th>% 2FGA</th>
+                <th>% 0-3ft</th>
+                <th>% 3-10ft</th>
+                <th>% 10-16ft</th>
+                <th>% 16-3pt</th>
+                <th>% 3pt</th>
+                <th>% Corner 3</th>
+                <th> </th>
+                <th>2 FG%</th>
+                <th>0-3%</th>
+                <th>3-10%</th>
+                <th>10-16%</th>
+                <th>16-3%</th>
+                <th>3pt%</th>
+                <th>Corner 3%</th>
+            </tr>
+        </thead>
+        {% for shooting in teamshooting %}
+            <tr>
+                <td>{{ shooting.team_name.nick_name }}</td>
+                <td> {{ shooting.morey_rate }}</td>
+                <!--<td>{{ shooting.pct_0_3_ft_fga|add:shooting.pct_3pt_fga|floatformat:1  }}</td>-->
+                <td>{{ shooting.pct_2_pt_fga }}</td>
+                <td>{{ shooting.pct_0_3_ft_fga }}</td>
+                <td>{{ shooting.pct_3_10_ft_fga }}</td>
+                <td>{{ shooting.pct_10_16_ft_fga }}</td>
+                <td>{{ shooting.pct_16_3pt_fga }}</td>
+                <td>{{ shooting.pct_3pt_fga }}</td>
+                <td>{{ shooting.pct_corner_3_fga }}</td>
+                <td> </td>
+                <td>{{ shooting.m_2_pt_fg_pct }}</td>
+                <td>{{ shooting.m_0_3_ft_fg_pct }}</td>
+                <td>{{ shooting.m_3_10_ft_fg_pct }}</td>
+                <td>{{ shooting.m_10_16_ft_fg_pct }}</td>
+                <td>{{ shooting.m_16_3pt_fg_pct }}</td>
+                <td>{{ shooting.m_3pt_fg_pct }}</td>
+                <td>{{ shooting.m_corner_3_fg_pct }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <table id="misc_data" class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive">
+          <thead class="thead-light">
+            <tr>
+                <th id="team">Team</th>
+                <th>Net RTG</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th> </th>
+                <th>ORtg</th>
+                <th>TS%</th>
+                <th>3att Rate</th>
+                <th>FT Rate</th>
+                <th>EFG%</th>
+                <th>ORB%</th>
+                <th>FT/FGA</th>
+                <th>TOV%</th>
+                <th> </th>
+                <th>DRtg</th>
+                <th>Def EFG%</th>
+                <th>DRB%</th>
+                <th>Opp FT/FGA</th>
+                <th>Opp TOV%</th>
+                <th> </th>
+                <th>Pace</th>
+            </tr>
+        </thead>
+        {% for team in teammiscdata %}
+            <tr>
+                <td>{{ team.team_name.nick_name }}</td>
+                <td>{{ team.net_rtg }}</td>
+                <td>{{ team.wins }}</td>
+                <td>{{ team.losses }}</td>
+                <td> </td>
+                <td>{{ team.off_rtg }}</td>
+                <td>{{ team.true_shooting_pct }}</td>
+                <td>{{ team.three_att_rate }}</td>
+                <td>{{ team.ft_rate }}</td>
+                <td>{{ team.off_efg }}</td>
+                <td>{{ team.orb_pct }}</td>
+                <td>{{ team.off_ft_per_fga }}</td>
+                <td>{{ team.off_tov_pct }}</td>
+                <td> </td>
+                <td>{{ team.def_rtg }}</td>
+                <td>{{ team.def_efg }}</td>
+                <td>{{ team.drb_pct }}</td>
+                <td>{{ team.def_ft_per_fga }}</td>
+                <td>{{ team.def_tov_pct }}</td>
+                <td> </td>
+                <td>{{ team.pace }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content %}
