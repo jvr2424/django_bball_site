@@ -8,8 +8,11 @@ h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
-ul {
-  margin: 0;
+a {
+     color: inherit;
+}
+a:hover {
+     color: inherit;
 }
 
 .bg-steel {
@@ -37,6 +40,11 @@ ul {
   margin-top: 60px;
   display: inline-block;
 }
+
+#add_team {
+    width: 100%;
+}
+
 
 /*.table-nonfluid {
    width: auto !important;

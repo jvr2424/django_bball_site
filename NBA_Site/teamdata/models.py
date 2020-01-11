@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -7,12 +8,16 @@ from django.contrib.auth.models import User
 
 class Team(models.Model):
     # these are fields
+    conference = models.CharField(max_length=150)
     full_name = models.CharField(max_length=150)
     nick_name = models.CharField(max_length=150)
     city = models.CharField(max_length=150)
     abbr = models.CharField(max_length=150)
     nba_stats_team_id = models.IntegerField()
     alt_name = models.CharField(max_length=150, blank=True, null=True)
+
+    def get_absolute_url(self):
+        return reverse("teamdata-team", kwargs={"team_abbr": self.abbr})
 
     def __str__(self):
         return self.abbr
