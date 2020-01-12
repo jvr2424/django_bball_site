@@ -20,11 +20,14 @@ def glossary(request):
 
 def team(request, team_abbr):
     team = Team.objects.filter(abbr=team_abbr).first()
-    team_misc = TeamMiscData.objects.filter(team_name=team).first()
-    teamshooting = TeamShooting.objects.filter(team_name=team).first()
-    context = {
-        'title': team.abbr,
-        'teammisc': team_misc,
-        'teamshooting': teamshooting
-    }
+    if team != None:
+        team_misc = TeamMiscData.objects.filter(team_name=team).first()
+        teamshooting = TeamShooting.objects.filter(team_name=team).first()
+        context = {
+            'title': team.abbr,
+            'teammisc': team_misc,
+            'teamshooting': teamshooting
+        }
+    else:
+        context = {}
     return render(request, 'teamdata/team.html', context)

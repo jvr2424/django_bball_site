@@ -260,3 +260,4 @@ def run():
         newteam = Team(full_name=team['city'] + ' ' + team['nick_name'], nick_name=team['nick_name'], city=team['city'],
                        abbr=team['abbr'],nba_stats_team_id=team['nba_stats_team_id'], alt_name=team['alt_name'], conference=team['conference'])
         newteam.save()
+        print(team['nick_name'])

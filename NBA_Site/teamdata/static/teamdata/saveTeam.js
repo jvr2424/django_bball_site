@@ -1,6 +1,21 @@
-window.addEventListener('load', function ()
-{
-  console.log("It's loaded!")
+var list = "";
+var added_teams ="";
+var deeper_look_teams = []
+window.addEventListener('load', function () {
+
+    console.log("It's loaded!")
+    //get the loacl storage and set the list global var
+    list = document.getElementById("add_team");
+    if (localStorage.getItem('deeperLook')===null) {
+        localStorage.setItem('deeperLook', JSON.stringify([]));
+    } else {
+        deeper_look_teams = JSON.parse(localStorage.getItem('deeperLook'));
+        addTeams()
+    }
+
+
+
+    //add event listeners to all table rows so teams can be added
     var tbl = document.getElementsByClassName("sortable");
     for (j = 0; j<tbl.length; j++)
     {
@@ -15,14 +30,31 @@ window.addEventListener('load', function ()
             //console.log(team_name);
         }
     }
+
 })
 
-var deeper_look_teams = []
-var counter = 0
+function addTeams() {
+    localStorage.setItem('deeperLook', JSON.stringify(deeper_look_teams));
+    //add teams in localStorage to the deeper look box
+    list.innerHTML = "";
+    for (i =0; i<deeper_look_teams.length;i++)
+    {
+        list.innerHTML = list.innerHTML + deeper_look_teams[i];
+    }
+    //add the event listeners so they can be deleted
+     added_teams = document.getElementsByClassName("remove_team");
+      for (i=0; i<added_teams.length;i++)
+     {
+        added_teams[i].getElementsByTagName("td")[1].addEventListener("click", removeFromDeeperLook);
+
+     }
+     console.log("im running");
+     console.log(JSON.stringify(deeper_look_teams));
+}
+
 
 function addToDeeperLook()
  {
-  var list = document.getElementById("add_team");
   var current_team =  "<tr class=\"remove_team\"><td style=\"width: 95%;\">" + this.textContent  + "</td><td style=\"width: 5%;\"><button type=\"button\" class=\"btn btn-outline-danger btn-sm\">x</button></td></tr>";
   var isAdded = false;
 
@@ -37,18 +69,14 @@ function addToDeeperLook()
    if (isAdded==false)
    {
      deeper_look_teams.push(current_team);
-     list.innerHTML = list.innerHTML + deeper_look_teams[deeper_look_teams.length-1];
-
-     var added_teams = document.getElementsByClassName("remove_team");
-      for (i=0; i<added_teams.length;i++)
-     {
-        added_teams[i].getElementsByTagName("td")[1].addEventListener("click", removeFromDeeperLook);
-
-     }
-     counter = counter + 1;
+     addTeams()
 
  }
 }
+
+
+
+
 
 function removeFromDeeperLook()
 {
@@ -57,23 +85,8 @@ function removeFromDeeperLook()
     console.log(deeper_look_teams);
     var pos = deeper_look_teams.indexOf(this_entire_row);
     console.log(pos);
-    var list = document.getElementById("add_team");
+    // remove the item that was clicked
     deeper_look_teams.splice(pos, 1);
-   // deeper_look_teams.filter(team => team != this);
-    //console.log(deeper_look_teams)
-    //clear the list and reprint
-    list.innerHTML = "";
-
-    for (i =0; i<deeper_look_teams.length;i++)
-    {
-        list.innerHTML = list.innerHTML + deeper_look_teams[i];
-    }
-
-    var added_teams = document.getElementsByClassName("remove_team")
-     for (i=0; i< added_teams.length;i++)
-     {
-        added_teams[i].getElementsByTagName("td")[1].addEventListener("click", removeFromDeeperLook);
-     }
-
+    addTeams();
 
 }

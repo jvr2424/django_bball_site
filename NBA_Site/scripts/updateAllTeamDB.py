@@ -99,6 +99,7 @@ def getLatestShootingData(currentSeason):
                                        pct_corner_3_fga=pct_corner_3_fga,
                                        m_corner_3_fg_pct=_corner_3_fg_pct)
         newshootingdata.save()
+        print(team_name + 'misc')
 
 
 def getLatestMiscData(currentSeason):
@@ -192,6 +193,7 @@ def getLatestMiscData(currentSeason):
                                    def_tov_pct=scrapedRow['opp_tov_pct'],
                                    drb_pct=scrapedRow['drb_pct'], def_ft_per_fga=scrapedRow['opp_ft_rate'])
         newmiscdata.save()
+        print(team_name + 'misc')
     # team_name
     # wins = models.IntegerField()
     # losses = models.IntegerField()
