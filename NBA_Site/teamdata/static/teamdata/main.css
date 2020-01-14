@@ -45,7 +45,9 @@ a:hover {
     width: 100%;
 }
 
-
+.options {
+    width: 33%;
+}
 /*.table-nonfluid {
    width: auto !important;
    display:inline-block;

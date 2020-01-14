@@ -2,17 +2,21 @@
 {% block content %}
     <h1>Team Data Home</h1>
     <header>
-        <h4>Table</h4>
-        <select class= "input-small browser-default custom-select" id="table-select" name="table-select" >
-          <option value="0">Standings</option>
-          <option value="1">Shooting</option>
-        </select>
-        <h4>Conference</h4>
-        <select class= "input-small browser-default custom-select" id="conference" name="conference" >
-          <option value="All">All</option>
-          <option value="East">East</option>
-          <option value="West">West</option>
-        </select>
+        <div class= "options">
+            <h4>Table</h4>
+            <select class= "input-small browser-default custom-select" id="table-select" name="table-select" >
+              <option value="0">Standings</option>
+              <option value="1">Shooting</option>
+            </select>
+        </div>
+        <div class= "options">
+            <h4>Conference</h4>
+            <select class= "input-small browser-default custom-select" id="conference" name="conference" >
+              <option value="All">All</option>
+              <option value="East">East</option>
+              <option value="West">West</option>
+            </select>
+        </div>
         <p></p>
         <p></p>
         <p></p>
@@ -23,28 +27,26 @@
           <thead class="thead-light">
             <tr>
                 <th id="team">Team</th>
-                <th></th>
+                <th style="width:1%;"></th>
                 <th style="display: none;"></th>
                 <th>Net RTG</th>
                 <th>Wins</th>
                 <th>Losses</th>
-                <th> </th>
+                <th style="width: 1%;" > </th>
                 <th>ORtg</th>
                 <th>TS%</th>
                 <th>3att Rate</th>
                 <th>FT Rate</th>
                 <th>EFG%</th>
                 <th>ORB%</th>
-                <th>FT/FGA</th>
                 <th>TOV%</th>
+                <th>Pace</th>
                 <th> </th>
                 <th>DRtg</th>
                 <th>Def EFG%</th>
                 <th>DRB%</th>
                 <th>Opp FT/FGA</th>
                 <th>Opp TOV%</th>
-                <th> </th>
-                <th>Pace</th>
             </tr>
         </thead>
         {% for team in teammiscdata %}
@@ -62,16 +64,15 @@
                 <td>{{ team.ft_rate }}</td>
                 <td>{{ team.off_efg }}</td>
                 <td>{{ team.orb_pct }}</td>
-                <td>{{ team.off_ft_per_fga }}</td>
                 <td>{{ team.off_tov_pct }}</td>
+                <td>{{ team.pace }}</td>
                 <td> </td>
                 <td>{{ team.def_rtg }}</td>
                 <td>{{ team.def_efg }}</td>
                 <td>{{ team.drb_pct }}</td>
                 <td>{{ team.def_ft_per_fga }}</td>
                 <td>{{ team.def_tov_pct }}</td>
-                <td> </td>
-                <td>{{ team.pace }}</td>
+
             </tr>
         {% endfor %}
     </table>

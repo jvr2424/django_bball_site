@@ -25,8 +25,8 @@ window.addEventListener('load', function () {
 
         for (i=1; i< rows.length;i++)
         {
-            var team_name = rows[i].getElementsByTagName("td")[0];
-            team_name.addEventListener("click", addToDeeperLook);
+            var team_name_button = rows[i].getElementsByTagName("td")[1];
+            team_name_button.addEventListener("click", addToDeeperLook);
             //console.log(team_name);
         }
     }
@@ -55,7 +55,8 @@ function addTeams() {
 
 function addToDeeperLook()
  {
-  var current_team =  "<tr class=\"remove_team\"><td style=\"width: 95%;\">" + this.textContent  + "</td><td style=\"width: 5%;\"><button type=\"button\" class=\"btn btn-outline-danger btn-sm\">x</button></td></tr>";
+  var team_name = this.parentElement.getElementsByTagName('td')[0].innerHTML
+  var current_team =  "<tr class=\"remove_team\"><td style=\"width: 95%;\">" + team_name  + "</td><td style=\"width: 5%;\"><button type=\"button\" class=\"btn btn-outline-danger btn-sm\">x</button></td></tr>";
   var isAdded = false;
 
   for (i=0; i< deeper_look_teams.length;i++)
