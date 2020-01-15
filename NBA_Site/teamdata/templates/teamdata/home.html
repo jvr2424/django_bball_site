@@ -5,8 +5,10 @@
         <div class= "options">
             <h4>Table</h4>
             <select class= "input-small browser-default custom-select" id="table-select" name="table-select" >
-              <option value="0">Standings</option>
-              <option value="1">Shooting</option>
+                <option value="0">Quick Look</option>
+              <option value="1">Standings</option>
+              <option value="2">Shooting</option>
+                <option value="3">Opponent Shooting</option>
             </select>
         </div>
         <div class= "options">
@@ -22,6 +24,33 @@
         <p></p>
         <p></p>
     </header>
+    <table id="quick_data" class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive">
+          <thead class="thead-light">
+            <tr>
+                <th id="team">Team</th>
+                <th style="width:1%;"></th>
+                <th style="display: none;"></th>
+                <th>Net RTG</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Morey Rate</th>
+                <th>Def Morey Rate</th>
+
+            </tr>
+        </thead>
+        {% for team in teammiscdata %}
+            <tr>
+                <td><a href="{{ team.team_name.get_absolute_url }}"> {{ team.team_name.nick_name }} </a></td>
+                <td><button type="button" class="btn btn-outline-success btn-sm">+</button></td>
+                <td class="conference" style="display: none;">{{ team.team_name.conference }}</td>
+                <td>{{ team.net_rtg }}</td>
+                <td>{{ team.wins }}</td>
+                <td>{{ team.losses }}</td>
+                <td>{{ teamshooting.morey_rate }}</td>
+                <td>{{ oppshooting.morey_rate }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
     <table id="misc_data" class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive">
           <thead class="thead-light">
@@ -123,6 +152,55 @@
                 <td>{{ shooting.m_16_3pt_fg_pct }}</td>
                 <td>{{ shooting.m_3pt_fg_pct }}</td>
                 <td>{{ shooting.m_corner_3_fg_pct }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <table id="opp_shoot_data" class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive">
+          <thead class="thead-light">
+            <tr>
+
+                <th id="team">Team</th>
+                <th></th>
+                <th style="display: none;"></th>
+                <th>Morey Rate</th>
+                <th>% 2FGA</th>
+                <th>% 0-3ft</th>
+                <th>% 3-10ft</th>
+                <th>% 10-16ft</th>
+                <th>% 16-3pt</th>
+                <th>% 3pt</th>
+                <th>% Corner 3</th>
+                <th> </th>
+                <th>2 FG%</th>
+                <th>0-3%</th>
+                <th>3-10%</th>
+                <th>10-16%</th>
+                <th>16-3%</th>
+                <th>3pt%</th>
+                <th>Corner 3%</th>
+            </tr>
+        </thead>
+        {% for oppshoot in oppshooting %}
+            <tr>
+                <td><a href="{{ oppshoot.team_name.get_absolute_url }}"> {{ oppshoot.team_name.nick_name }} </a></td>
+                <td><button type="button" class="btn btn-outline-success btn-sm">+</button></td>
+                <td class="conference" style="display: none;">{{ oppshoot.team_name.conference }}</td>
+                <td> {{ oppshoot.morey_rate }}</td>
+                <td>{{ oppshoot.pct_2_pt_fga }}</td>
+                <td>{{ oppshoot.pct_0_3_ft_fga }}</td>
+                <td>{{ oppshoot.pct_3_10_ft_fga }}</td>
+                <td>{{ oppshoot.pct_10_16_ft_fga }}</td>
+                <td>{{ oppshoot.pct_16_3pt_fga }}</td>
+                <td>{{ oppshoot.pct_3pt_fga }}</td>
+                <td>{{ oppshoot.pct_corner_3_fga }}</td>
+                <td> </td>
+                <td>{{ oppshoot.m_2_pt_fg_pct }}</td>
+                <td>{{ oppshoot.m_0_3_ft_fg_pct }}</td>
+                <td>{{ oppshoot.m_3_10_ft_fg_pct }}</td>
+                <td>{{ oppshoot.m_10_16_ft_fg_pct }}</td>
+                <td>{{ oppshoot.m_16_3pt_fg_pct }}</td>
+                <td>{{ oppshoot.m_3pt_fg_pct }}</td>
+                <td>{{ oppshoot.m_corner_3_fg_pct }}</td>
             </tr>
         {% endfor %}
     </table>

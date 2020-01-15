@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Team, TeamMiscData, TeamShooting
+from .models import Team, TeamMiscData, TeamShooting, DefensiveShooting
 
 
 
@@ -9,7 +9,8 @@ from .models import Team, TeamMiscData, TeamShooting
 def home(request):
     context = {
         'teammiscdata': TeamMiscData.objects.all(),
-        'teamshooting': TeamShooting.objects.all()
+        'teamshooting': TeamShooting.objects.all(),
+        'oppshooting': DefensiveShooting.objects.all()
     }
     return render(request, 'teamdata/home.html', context)
 

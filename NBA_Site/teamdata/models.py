@@ -32,23 +32,51 @@ class TeamMiscData(models.Model):
     def_rtg = models.DecimalField(max_digits=7, decimal_places=1)
     net_rtg = models.DecimalField(max_digits=7, decimal_places=1)
     pace = models.DecimalField(max_digits=7, decimal_places=1)
-    ft_rate = models.DecimalField(max_digits=7, decimal_places=3)
-    three_att_rate = models.DecimalField(max_digits=7, decimal_places=3)
-    true_shooting_pct = models.DecimalField(max_digits=7, decimal_places=3)
-    off_efg = models.DecimalField(max_digits=7, decimal_places=3)
+    ft_rate = models.DecimalField(max_digits=7, decimal_places=1)
+    three_att_rate = models.DecimalField(max_digits=7, decimal_places=1)
+    true_shooting_pct = models.DecimalField(max_digits=7, decimal_places=1)
+    off_efg = models.DecimalField(max_digits=7, decimal_places=1)
     off_tov_pct = models.DecimalField(max_digits=7, decimal_places=1)
     orb_pct = models.DecimalField(max_digits=7, decimal_places=1)
-    off_ft_per_fga = models.DecimalField(max_digits=7, decimal_places=3)
-    def_efg = models.DecimalField(max_digits=7, decimal_places=3)
+    off_ft_per_fga = models.DecimalField(max_digits=7, decimal_places=1)
+    def_efg = models.DecimalField(max_digits=7, decimal_places=1)
     def_tov_pct = models.DecimalField(max_digits=7, decimal_places=1)
     drb_pct = models.DecimalField(max_digits=7, decimal_places=1)
-    def_ft_per_fga = models.DecimalField(max_digits=7, decimal_places=3)
+    def_ft_per_fga = models.DecimalField(max_digits=7, decimal_places=1)
 
     def __str__(self):
         return self.team_name.abbr
 
 
 class TeamShooting(models.Model):
+    # Rk	Team	G	MP	FG%	Dist.	2P	0-3	3-10	10-16	16-3pt	3P	2P	0-3	3-10	10-16	16-3pt	3P	%Ast'd	%FGA	Md.	%FGA	Md.	%Ast'd	%3PA	3P%	Att.	Md
+    team_name = models.ForeignKey('Team', on_delete=models.CASCADE)
+    morey_rate = models.DecimalField(max_digits=7, decimal_places=1, default=0.0)
+    pct_2_pt_fga = models.DecimalField(max_digits=7, decimal_places=1)
+    pct_0_3_ft_fga = models.DecimalField(max_digits=7, decimal_places=1)
+    pct_3_10_ft_fga = models.DecimalField(max_digits=7, decimal_places=1)
+    pct_10_16_ft_fga = models.DecimalField(max_digits=7, decimal_places=1)
+    pct_16_3pt_fga = models.DecimalField(max_digits=7, decimal_places=1)
+    pct_3pt_fga = models.DecimalField(max_digits=7, decimal_places=1)
+    m_2_pt_fg_pct = models.DecimalField(max_digits=7, decimal_places=1)
+    m_0_3_ft_fg_pct = models.DecimalField(max_digits=7, decimal_places=1)
+    m_3_10_ft_fg_pct = models.DecimalField(max_digits=7, decimal_places=1)
+    m_10_16_ft_fg_pct = models.DecimalField(max_digits=7, decimal_places=1)
+    m_16_3pt_fg_pct = models.DecimalField(max_digits=7, decimal_places=1)
+    m_3pt_fg_pct = models.DecimalField(max_digits=7, decimal_places=1)
+    pct_astd_2_pt_fg = models.DecimalField(max_digits=7, decimal_places=1)
+    pct_dunks_att = models.DecimalField(max_digits=7, decimal_places=1)
+    pct_layups_att = models.DecimalField(max_digits=7, decimal_places=1)
+    pct_corner_3_fga = models.DecimalField(max_digits=7, decimal_places=1)
+    m_corner_3_fg_pct = models.DecimalField(max_digits=7, decimal_places=1)
+
+    def __str__(self):
+        return self.team_name.abbr
+
+
+
+
+class DefensiveShooting(models.Model):
     # Rk	Team	G	MP	FG%	Dist.	2P	0-3	3-10	10-16	16-3pt	3P	2P	0-3	3-10	10-16	16-3pt	3P	%Ast'd	%FGA	Md.	%FGA	Md.	%Ast'd	%3PA	3P%	Att.	Md
     team_name = models.ForeignKey('Team', on_delete=models.CASCADE)
     morey_rate = models.DecimalField(max_digits=7, decimal_places=1, default=0.0)
