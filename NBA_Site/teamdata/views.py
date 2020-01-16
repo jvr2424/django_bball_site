@@ -3,14 +3,30 @@ from django.http import HttpResponse
 from .models import Team, TeamMiscData, TeamShooting, DefensiveShooting
 
 
-
-
 # Create your views here.
 def home(request):
+    offShooting = TeamShooting.objects.all().order_by('team_name')
+    defShooting = DefensiveShooting.objects.all().order_by('team_name')
+    miscData = TeamMiscData.objects.all().order_by('team_name')
+    joinOffDefDict = []
+
+    for x in range(0, 30):
+        dict = {
+            'team_name': offShooting[x].team_name,
+            'wins': miscData[x].wins,
+            'losses': miscData[x].losses,
+            'net_rtg': miscData[x].net_rtg,
+            'off_morey_rate': offShooting[x].morey_rate,
+            'def_morey_rate': defShooting[x].morey_rate,
+            'off_minus_def_morey_rt': offShooting[x].morey_rate - defShooting[x].morey_rate
+        }
+        joinOffDefDict.append(dict)
+
     context = {
-        'teammiscdata': TeamMiscData.objects.all(),
-        'teamshooting': TeamShooting.objects.all(),
-        'oppshooting': DefensiveShooting.objects.all()
+        'teammiscdata': miscData,
+        'teamshooting': offShooting,
+        'oppshooting': defShooting,
+        'joineddata': joinOffDefDict
     }
     return render(request, 'teamdata/home.html', context)
 

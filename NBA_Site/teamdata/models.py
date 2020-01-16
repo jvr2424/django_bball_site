@@ -24,7 +24,7 @@ class Team(models.Model):
 
 
 class TeamMiscData(models.Model):
-    team_name = models.ForeignKey('Team', on_delete=models.CASCADE)
+    team_name = models.ForeignKey('Team', on_delete=models.CASCADE, related_name='misc_team_name')
     #	Age	W	L	PW	PL	MOV	SOS	SRS	ORtg	DRtg	NRtg	Pace	FTr	3PAr	TS%	eFG%	TOV%	ORB%	FT/FGA	eFG%	TOV%	DRB%	FT/FGA
     wins = models.IntegerField()
     losses = models.IntegerField()
@@ -48,9 +48,10 @@ class TeamMiscData(models.Model):
         return self.team_name.abbr
 
 
+
 class TeamShooting(models.Model):
     # Rk	Team	G	MP	FG%	Dist.	2P	0-3	3-10	10-16	16-3pt	3P	2P	0-3	3-10	10-16	16-3pt	3P	%Ast'd	%FGA	Md.	%FGA	Md.	%Ast'd	%3PA	3P%	Att.	Md
-    team_name = models.ForeignKey('Team', on_delete=models.CASCADE)
+    team_name = models.ForeignKey('Team', on_delete=models.CASCADE, related_name='off_team_name')
     morey_rate = models.DecimalField(max_digits=7, decimal_places=1, default=0.0)
     pct_2_pt_fga = models.DecimalField(max_digits=7, decimal_places=1)
     pct_0_3_ft_fga = models.DecimalField(max_digits=7, decimal_places=1)
@@ -78,7 +79,7 @@ class TeamShooting(models.Model):
 
 class DefensiveShooting(models.Model):
     # Rk	Team	G	MP	FG%	Dist.	2P	0-3	3-10	10-16	16-3pt	3P	2P	0-3	3-10	10-16	16-3pt	3P	%Ast'd	%FGA	Md.	%FGA	Md.	%Ast'd	%3PA	3P%	Att.	Md
-    team_name = models.ForeignKey('Team', on_delete=models.CASCADE)
+    team_name = models.ForeignKey('Team', on_delete=models.CASCADE, related_name='def_team_name')
     morey_rate = models.DecimalField(max_digits=7, decimal_places=1, default=0.0)
     pct_2_pt_fga = models.DecimalField(max_digits=7, decimal_places=1)
     pct_0_3_ft_fga = models.DecimalField(max_digits=7, decimal_places=1)

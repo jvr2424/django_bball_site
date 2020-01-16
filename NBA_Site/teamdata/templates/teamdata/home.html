@@ -1,5 +1,8 @@
 {% extends "teamdata/base.html" %}
+{% load static %}
 {% block content %}
+<script src="{% static 'teamdata/selectFilters.js' %}"></script>
+
     <h1>Team Data Home</h1>
     <header>
         <div class= "options">
@@ -35,19 +38,21 @@
                 <th>Losses</th>
                 <th>Morey Rate</th>
                 <th>Def Morey Rate</th>
+                <th>Net Morey Rate</th>
 
             </tr>
         </thead>
-        {% for team in teammiscdata %}
+        {% for data in joineddata %}
             <tr>
-                <td><a href="{{ team.team_name.get_absolute_url }}"> {{ team.team_name.nick_name }} </a></td>
+                <td><a href="{{ data.team_name.get_absolute_url }}"> {{ data.team_name.nick_name }} </a></td>
                 <td><button type="button" class="btn btn-outline-success btn-sm">+</button></td>
                 <td class="conference" style="display: none;">{{ team.team_name.conference }}</td>
-                <td>{{ team.net_rtg }}</td>
-                <td>{{ team.wins }}</td>
-                <td>{{ team.losses }}</td>
-                <td>{{ teamshooting.morey_rate }}</td>
-                <td>{{ oppshooting.morey_rate }}</td>
+                <td>{{ data.net_rtg }}</td>
+                <td>{{ data.wins }}</td>
+                <td>{{ data.losses }}</td>
+                <td>{{ data.off_morey_rate }}</td>
+                <td>{{ data.def_morey_rate }}</td>
+                <td>{{ data.off_minus_def_morey_rt }}</td>
             </tr>
         {% endfor %}
     </table>
