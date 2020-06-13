@@ -6,16 +6,49 @@
     <h1>Team Data Home</h1>
     <header>
         <div class= "options">
-            <h4>VUE Table </h4>
+            <h4>Select Table </h4>
             <select  v-model="table" class= "input-small browser-default custom-select"  name="vue-table-select" >
                 <option v-for="(tableOption, index) in tableOptions" v-bind:value="tableOption.value">
                     [[ tableOption.text ]]
                 </option>
             </select>
         </div>
+
+        <div class= "options mt-2">
+            <h4>Select Conference </h4>
+            <select  v-model="conference" @change="filterConference" class= "input-small browser-default custom-select"  name="vue-conference-select" >
+                <option v-for="(conferenceOption, index) in conferenceOptions" v-bind:value="conferenceOption.value">
+                    [[ conferenceOption.text ]]
+                </option>
+            </select>
+        </div>
+
+
         
     </header>
     <table class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive mt-5">
+        <thead class="thead-light">
+            <tr>
+                <th v-for="header in tableData[table].headers">
+                    [[ header ]]
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+        <tr v-for="d in tableData[table].data">
+            <td v-for="header in tableData[table].headers">
+                [[ d[header] ]]
+            </td>
+        </tr>
+    </tbody>
+
+    </table>
+
+
+
+
+    <!-- <table class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive mt-5">
         <thead class="thead-light">
             <tr>
                 <th v-for="header in tableData[table].headers">
@@ -29,7 +62,7 @@
             </td>
         </tr>
 
-    </table>
+    </table> -->
     <!--
     <table id="quick_data" class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive">
           <thead class="thead-light">
