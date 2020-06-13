@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Team, TeamMiscData, TeamShooting, DefensiveShooting
-
+from django.views.generic import View
+from django.http import JsonResponse
+from django.core import serializers
 
 # Create your views here.
 def home(request):
@@ -48,3 +50,11 @@ def team(request, team_abbr):
     else:
         context = {}
     return render(request, 'teamdata/team.html', context)
+
+
+
+class ApiData(View):
+    def get(self, request):
+        team = Team.objects.filter(abbr='NYK').first()
+
+        return JsonResponse(team)

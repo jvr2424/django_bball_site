@@ -1,32 +1,36 @@
 {% extends "teamdata/base.html" %}
 {% load static %}
 {% block content %}
-<script src="{% static 'teamdata/selectFilters.js' %}"></script>
-
+<!-- <script src="{% static 'teamdata/selectFilters.js' %}"></script> -->
+<div id="app">
     <h1>Team Data Home</h1>
     <header>
         <div class= "options">
-            <h4>Table</h4>
-            <select class= "input-small browser-default custom-select" id="table-select" name="table-select" >
-                <option value="0">Quick Look</option>
-              <option value="1">Standings</option>
-              <option value="2">Shooting</option>
-                <option value="3">Opponent Shooting</option>
+            <h4>VUE Table </h4>
+            <select  v-model="table" class= "input-small browser-default custom-select"  name="vue-table-select" >
+                <option v-for="(tableOption, index) in tableOptions" v-bind:value="tableOption.value">
+                    [[ tableOption.text ]]
+                </option>
             </select>
         </div>
-        <div class= "options">
-            <h4>Conference</h4>
-            <select class= "input-small browser-default custom-select" id="conference" name="conference" >
-              <option value="All">All</option>
-              <option value="East">East</option>
-              <option value="West">West</option>
-            </select>
-        </div>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+        
     </header>
+    <table class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive mt-5">
+        <thead class="thead-light">
+            <tr>
+                <th v-for="header in tableData[table].headers">
+                    [[ header ]]
+                </th>
+
+            </tr>
+        <tr v-for="d in tableData[table].data">
+            <td v-for="header in tableData[table].headers">
+                [[ d[header] ]]
+            </td>
+        </tr>
+
+    </table>
+    <!--
     <table id="quick_data" class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive">
           <thead class="thead-light">
             <tr>
@@ -141,7 +145,7 @@
                 <td><button type="button" class="btn btn-outline-success btn-sm">+</button></td>
                 <td class="conference" style="display: none;">{{ shooting.team_name.conference }}</td>
                 <td> {{ shooting.morey_rate }}</td>
-                <!--<td>{{ shooting.pct_0_3_ft_fga|add:shooting.pct_3pt_fga|floatformat:1  }}</td>-->
+                <td>{{ shooting.pct_0_3_ft_fga|add:shooting.pct_3pt_fga|floatformat:1  }}</td>
                 <td>{{ shooting.pct_2_pt_fga }}</td>
                 <td>{{ shooting.pct_0_3_ft_fga }}</td>
                 <td>{{ shooting.pct_3_10_ft_fga }}</td>
@@ -209,4 +213,6 @@
             </tr>
         {% endfor %}
     </table>
+-->
+</div>
 {% endblock content %}

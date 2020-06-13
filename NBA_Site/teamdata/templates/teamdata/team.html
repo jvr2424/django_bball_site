@@ -1,10 +1,28 @@
 {% extends "teamdata/base.html" %}
 {% load static %}
 {% block content %}
+
     <div id="team-id" style="display: none;">{{ teammisc.team_name.nba_stats_team_id }}</div>
     <h1>{{ teammisc.team_name.full_name }}</h1>
     <h1>Net Rating: {{ teammisc.net_rtg }}</h1>
     <h1>Morey Rate: {{ teamshooting.morey_rate }}</h1>
+    <div class= "options">
+        <h4>Table</h4>
+        <select class= "input-small browser-default custom-select" id="table-select" name="table-select" >
+            <option value="0">Shooting</option>
+            <!--<option value="1">Standings</option>
+            //</option value="2">Shooting</option>
+            //<option value="3">Opponent Shooting</option> -->
+        </select>
+    </div>
+    <div class= "options">
+        <h4>Table Options</h4>
+        <select class= "input-small browser-default custom-select" id="table-options" name="table-options" >
+          <option value="PCT_Player">Percents of Player</option>
+          <option value="Raw">Raw</option>
+          <option value="PCT_Team">Percent of Team</option>
+        </select>
+    </div>
 
     <table id="team_shooting" class="table sortable table-nonfluid table-striped table-hover table-bordered table-responsive">
         <thead class="thead-light">
@@ -18,4 +36,5 @@
         </tfoot>
     </table>
     <script src="{% static 'teamdata/teamPage.js' %}"></script>
+
 {% endblock content %}

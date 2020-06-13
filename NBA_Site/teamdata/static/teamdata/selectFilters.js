@@ -2,12 +2,15 @@ window.addEventListener('load', function ()
 {
     var tbl_selector = document.getElementById("table-select");
     var conference_selector = document.getElementById("conference");
+   
 
 
     tbl_selector.addEventListener("click", showHideTable);
     conference_selector.addEventListener("click", selectConference);
+    
     showHideTable();
     selectConference();
+    
 })
 
 //shows the table the user selects, hides all others
@@ -56,11 +59,6 @@ function selectConference() {
             }
         }
     }
-
-
-
-
-
 }
 
 
